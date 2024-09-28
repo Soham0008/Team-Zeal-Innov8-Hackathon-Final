@@ -23,11 +23,12 @@ def read_pdf(file_path):
     return text
 
 def read_recommendations(folder_path):
-    recommendations = []
+    recommendations = {}
     for file_name in os.listdir(folder_path):
         if file_name.endswith('.txt'):
+            recommender_id = file_name.split('_')[-1].split('.')[0]
             with open(os.path.join(folder_path, file_name), 'r', encoding='utf-8', errors='ignore') as file:
-                recommendations.append(file.read())
+                recommendations[recommender_id] = file.read()
     return recommendations
 
 def segregate_sections(text):
@@ -64,7 +65,7 @@ def organize_data(resume_dir, recommendation_dir, recommender_map):
         
         data[candidate_id] = {
             'sections': sections,
-            'recommendations': ' '.join(recommendations),  # Combine recommendations
+            'recommendations': recommendations,  # Dictionary of recommender ID and recommendation
             'recommenders': ','.join(recommender_map[candidate_id])
         }
     return data
@@ -78,6 +79,7 @@ def flatten_data(data):
     flattened_data = []
     for candidate_id, details in data.items():
         sections = details['sections']
+        recommendations = details['recommendations']
         flattened_data.append({
             'candidate_id': candidate_id,
             'position': sections.get('position', ''),
@@ -88,7 +90,7 @@ def flatten_data(data):
             'skills': sections.get('skills', ''),
             'certificates': sections.get('certificates', ''),
             'recommenders': details['recommenders'],
-            'recommendations': details['recommendations']
+            'recommendations': json.dumps(recommendations)  # Store recommendations as JSON string
         })
     return flattened_data
 
@@ -125,5 +127,5 @@ if __name__ == "__main__":
     flattened_data = flatten_data(json_data)
     
     # Write to CSV
-    csv_output_path = 'organized_data.csv'
+    csv_output_path = 'new_organized_data.csv'
     write_csv(flattened_data, csv_output_path)
