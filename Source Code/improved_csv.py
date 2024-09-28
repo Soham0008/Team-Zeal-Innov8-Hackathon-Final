@@ -29,7 +29,7 @@ def segregate_sections(text):
         'position': ['position', 'professional position'],
         'summary': ['summary', 'professional summary'],
         'highlights': ['highlights', 'key highlights'],
-        'experience': ['experience', 'professional experience', 'work experience'],
+        'experience': ['experience', 'professional experience', 'work experience','work history'],
         'education': ['education', 'academic background'],
         'skills': ['skills', 'technical skills'],
         'certificates': ['certificates', 'certifications']
