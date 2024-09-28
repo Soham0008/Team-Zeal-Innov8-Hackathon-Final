@@ -105,7 +105,7 @@ def write_csv(data, file_path):
 if __name__ == "__main__":
     resume_dir = 'resumes'
     recommendation_dir = 'recommendations'
-    csv_file_path = 'Final_Persons_And_Recommenders.csv'
+    csv_file_path = 'Datasets/Final_Persons_And_Recommenders.csv'
     
     # Read CSV file
     recommender_map = read_csv(csv_file_path)
