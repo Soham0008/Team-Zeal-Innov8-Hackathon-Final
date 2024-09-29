@@ -1,10 +1,10 @@
 import React from 'react';
-import Sidebar from '../components/Sidebar';
+import Topbar from '../components/Topbar';
 
 const Dashboard = () => {
     return(
         <div className='flex-col'>
-    <><Sidebar />
+    <><Topbar />
     <div className=''><h1>Dashboard</h1></div>
     </>
     </div>
