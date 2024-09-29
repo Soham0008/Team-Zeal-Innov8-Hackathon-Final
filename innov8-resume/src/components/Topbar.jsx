@@ -9,7 +9,7 @@ const Topbar = () => {
           {/* Navbar */}
           <nav className="flex justify-between bg-gray-900 text-white w-screen">
             <div className="px-5 xl:px-12 py-6 flex w-full items-center">
-              <a className="text-3xl font-bold font-heading" href="#">
+              <a className="text-3xl font-bold font-heading" >
                 {/* <img className="h-9" src="logo.png" alt="logo"> */}
               </a>
               {/* Nav Links */}

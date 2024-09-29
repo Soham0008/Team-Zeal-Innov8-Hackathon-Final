@@ -1,24 +1,31 @@
 import React from 'react';
 import Card from './Card';
+import { useEffect, useRef } from 'react';
 
-const CompareCards = () => {
-  const card1 = { id: 1, title: 'Card 1', description: 'This is the first card.' };
-  const card2 = { id: 2, title: 'Card 2', description: 'This is the second card.' };
+const CompareCards = ({ selectedCards }) => {
+  const comparisonRef = useRef(null);
+
+  useEffect(() => {
+    if (selectedCards.length === 2) {
+      comparisonRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [selectedCards]);
+
+  if (selectedCards.length !== 2) {
+    return null;
+  }
 
   return (
-    <div className="py-10 bg-gradient-to-r min-h-screen from-blue-500 to-purple-600">
-        <div className='text-center font-bold text-xl mb-2'>
-            Comparison Between these two Candidates
-        </div>
-    <div className='flex justify-center space-x-40 mt-10'>
-      <Card id={card1.id} title={card1.title} description={card1.description} />
-      <div className='text-center justify-center font-bold text-xl mb-2 mt-10'>
-        VS
+    <div ref={comparisonRef} className="comparison">
+      <div className='text-center font-bold text-xl mb-2'>
+      Comparison
       </div>
-      <Card id={card2.id} title={card2.title} description={card2.description} />
+      <div className="flex flex-row justify-center w-auto h-auto gap-10">
+        <Card id={selectedCards[0].candidate_id} title={selectedCards[0].name} rank={selectedCards[0].rank}  isSelected={true}/>
+        <Card id={selectedCards[1].candidate_id} title={selectedCards[1].name} rank={selectedCards[1].rank} isSelected={true}/>
       </div>
     </div>
   );
-}
+};
 
 export default CompareCards;
