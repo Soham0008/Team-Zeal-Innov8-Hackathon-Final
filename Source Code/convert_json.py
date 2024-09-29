@@ -1,17 +1,20 @@
 import pandas as pd
 
 # Step 1: Read the CSV file
-csv_file_path = 'Datasets/final_dataset_ranked_ordered (1).csv'
+csv_file_path = r'Datasets\final_dataset_ranked_ordered (1).csv'
 df = pd.read_csv(csv_file_path)
 
-# Step 2: Select specific columns
-selected_columns = ['Unnamed: 0', 'name', 'score_5']
+# Step 2: Rename the 'Unnamed: 0' column to 'candidate_id'
+df.rename(columns={'Unnamed: 0': 'candidate_id'}, inplace=True)
+
+# Step 3: Select specific columns
+selected_columns = ['candidate_id', 'name', 'score_5']
 df_selected = df[selected_columns]
 
-# Step 3: Convert the DataFrame to a JSON string
+# Step 4: Convert the DataFrame to a JSON string
 json_str = df_selected.to_json(orient='records')
 
-# Step 4: Save the JSON string to a file
+# Step 5: Save the JSON string to a file
 json_file_path = 'Datasets/final.json'
 with open(json_file_path, 'w') as json_file:
     json_file.write(json_str)
